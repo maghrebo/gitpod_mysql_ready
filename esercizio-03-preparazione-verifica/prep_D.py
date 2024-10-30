@@ -38,16 +38,25 @@ def inserisci_animale():
     mydb.commit()
     print("Animale inserito correttamente!")
 
-# Ciclo per inserire 5 animali
-for i in range(5):
-    inserisci_animale()
+#Input della scelta della voglia di stampare alti 5
+scelta = input("Vuoi inserire altri 5 animali? (si o no)  ")
 
-    # Chiedi all'utente se vuole inserire un altro animale
-    if i < 4:  # Solo se non è la quinta volta
-        continua = input("Vuoi inserire un altro animale? (s/n): ").strip().lower()
-        if continua != 's':
-            print("Interruzione dell'inserimento.")
-            break
+
+# Ciclo per inserire 5 animali in caso la risposta fosse si
+if scelta.lower() == "si" :
+
+    for i in range(5):
+        inserisci_animale()
+
+        # Chiedi all'utente se vuole inserire un altro animale
+        if i < 4:  # Solo se non è la quinta volta
+            continua = input("Vuoi inserire un altro animale? (s/n): ").strip().lower()
+            if continua != 's':
+                print("Interruzione dell'inserimento.")
+                break
+
+else:
+    print("Hai inserito una parola diversa da si, grazie e arrivederci")
 
 # Verifica degli animali inseriti
 print("\nAnimali inseriti:")
