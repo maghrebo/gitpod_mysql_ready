@@ -1,5 +1,5 @@
 import mysql.connector
-from flask import Flask
+from flask import Flask, jsonify
 
 #Connect to mysql
 mydb = mysql.connector.connect(
@@ -22,10 +22,26 @@ def getAllData():
         result.append(x);
     return result
 
+def getRazza():
+    query = "SELECT * FROM mammiferi WHERE razza = %s"
+    mycursor.execute(query, (razza,))
+    result = [];
+    for x in myresult:
+        print(x);
+        result.append(x);
+    return result
+
 @app.route("/")
 def stampaDati():
     data = getAllData()
-    return ({"Mammiferi: " : data})
+    return jsonify({"Mammiferi": data})
+
+@app.route("/<razza>")
+def stampaRazza(razza):
+    data = getRazza(razza)
+    return jsonify({"Mammiferi": data})
+
+
 
 # Da modificare personlizzando per il mio database degli animali (mammiferi)
 
